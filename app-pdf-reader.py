@@ -17,11 +17,8 @@ search_button = st.button("Buscar")
 # Procesar la solicitud cuando se carga el archivo PDF
 if uploaded_file is not None and search_button:
     # Leer el archivo PDF
-    pdf_file = io.BytesIO()
-    pdf_file.write(uploaded_file)
-    pdf_file.seek(0)  # Reset the file pointer to the beginning
-    pdf_reader = PyPDF2.PdfFileReader(pdf_file)
-
+    pdf_file = uploaded_file.read()
+    pdf_reader = PyPDF2.PdfFileReader(io.BytesIO(pdf_file))
     # Leer el contenido del archivo PDF
     pdf_text = ""
     for page in pdf_reader.pages:
