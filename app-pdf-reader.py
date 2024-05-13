@@ -18,7 +18,7 @@ search_button = st.button("Buscar")
 if uploaded_file is not None and search_button:
     # Leer el archivo PDF
     pdf_file = uploaded_file.read()
-    pdf_reader = PyPDF2.PdfFileReader(io.BytesIO(pdf_file))
+    pdf_reader = PyPDF2.PdfReader(io.BytesIO(pdf_file))
     # Leer el contenido del archivo PDF
     pdf_text = ""
     for page in pdf_reader.pages:
