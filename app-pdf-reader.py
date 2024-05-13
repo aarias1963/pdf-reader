@@ -55,6 +55,13 @@ if generate_summary_button:
         pdf_text = ""
         for page in pdf_reader.pages:
             pdf_text += page.extract_text()
+        try:
+            # Enviar solicitud a la API de Groq
+            response = requests.post(
+                groq_api_url,
+                headers={"Authorization": f"Bearer {groq_api_key}"},
+                json={"text": pdf_text, "num_sentences": 5}  # Configuración del resumen
+            )
 
         # Enviar solicitud a la API de Groq
         response = requests.post(
