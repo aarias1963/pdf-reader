@@ -14,6 +14,17 @@ search_words = st.text_input("Buscar palabras")
 # Crear un botón para buscar palabras
 search_button = st.button("Buscar")
 
+if search_button:
+    if uploaded_file is None:
+        st.error("Por favor, suba un archivo PDF antes de buscar.")
+    else:
+        # Leer el archivo PDF
+        pdf_file = uploaded_file.read()
+        pdf_reader = PyPDF2.PdfReader(io.BytesIO(pdf_file))
+        pdf_text = ""
+        for page in pdf_reader.pages:
+            pdf_text += page.extract_text()
+
 # Procesar la solicitud cuando se carga el archivo PDF
 if uploaded_file is not None and search_button:
     # Leer el archivo PDF
@@ -23,9 +34,6 @@ if uploaded_file is not None and search_button:
     pdf_text = ""
     for page in pdf_reader.pages:
         pdf_text += page.extract_text()
-
-if uploaded_file is None and search_button:
-    st.write("Debes subir un archivo PDF!")
 
     
     # Buscar las palabras en el contenido del archivo PDF
