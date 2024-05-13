@@ -6,7 +6,7 @@ import requests
 
 # Configuración de la API de Groq
 groq_api_key = os.environ['GROQ_API_KEY']
-groq_api_url = "https://api.groq.com/v1/summarize"
+groq_api_url = "https://api.groq.com/v1/llama3=summarize"
 
 # Crear un título para la aplicación
 st.title("Buscar palabras en un archivo PDF y generar resumen")
@@ -56,19 +56,19 @@ if generate_summary_button:
         for page in pdf_reader.pages:
             pdf_text += page.extract_text()
         try:
-            # Enviar solicitud a la API de Groq
+            # Enviar solicitud a la API de Groq con LLaMA 3
             response = requests.post(
                 groq_api_url,
                 headers={"Authorization": f"Bearer {groq_api_key}"},
-                json={"text": pdf_text, "num_sentences": 5}  # Configuración del resumen
+                json={"text": pdf_text, "num_sentences": 5, "llama3": True}  # Configuración del resumen con LLaMA 3
             )
 
-       # Procesar la respuesta de la API
+            # Procesar la respuesta de la API
             if response.status_code == 200:
                 summary = response.json()["summary"]
-                st.write("Resumen:")
+                st.write("Resumen generado con LLaMA 3:")
                 st.write(summary)
             else:
-                st.error("Error al generar resumen. Inténtelo de nuevo.")
+                st.error("Error al generado resumen. Inténtelo de nuevo.")
         except requests.RequestException as e:
-            st.error(f"Error al generar resumen: {e}")
+            st.error(f"Error al generado resumen: {e}")
