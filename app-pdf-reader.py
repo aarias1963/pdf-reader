@@ -22,7 +22,7 @@ if uploaded_file is not None and search_button:
     # Leer el contenido del archivo PDF
     pdf_text = ""
     for page in pdf_reader.pages:
-        pdf_text += page.extractText()
+        pdf_text += page.extract_text()
 
     # Buscar las palabras en el contenido del archivo PDF
     results = [word for word in search_words.split() if word in pdf_text]
