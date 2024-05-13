@@ -25,16 +25,6 @@ if search_button:
         for page in pdf_reader.pages:
             pdf_text += page.extract_text()
 
-# Procesar la solicitud cuando se carga el archivo PDF
-if uploaded_file is not None and search_button:
-    # Leer el archivo PDF
-    pdf_file = uploaded_file.read()
-    pdf_reader = PyPDF2.PdfReader(io.BytesIO(pdf_file))
-    # Leer el contenido del archivo PDF
-    pdf_text = ""
-    for page in pdf_reader.pages:
-        pdf_text += page.extract_text()
-
     
     # Buscar las palabras en el contenido del archivo PDF
     results = [word for word in search_words.split() if word in pdf_text]
