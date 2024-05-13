@@ -1,6 +1,7 @@
 import streamlit as st
 import PyPDF2
 import io
+import os
 import requests
 
 # Configuración de la API de Groq
