@@ -23,9 +23,11 @@ if uploaded_file is not None and search_button:
     pdf_text = ""
     for page in pdf_reader.pages:
         pdf_text += page.extract_text()
-else:
-     st.write("Debes subir un PDF!")
 
+if uploaded_file is None and search_button:
+    st.write("Debes subir un archivo PDF!")
+
+    
     # Buscar las palabras en el contenido del archivo PDF
     results = [word for word in search_words.split() if word in pdf_text]
 
