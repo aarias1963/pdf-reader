@@ -5,7 +5,7 @@ import PyPDF2
 st.title("Buscar palabras en un archivo PDF")
 
 # Crear un uploader de archivos
-uploaded_file = 'prueba.pdf'
+uploaded_file = st.file_uploader("Seleccione un archivo PDF", type=["pdf"])
 
 # Crear un campo de texto para ingresar las palabras a buscar
 search_words = st.text_input("Buscar palabras")
