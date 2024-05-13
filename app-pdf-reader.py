@@ -63,17 +63,12 @@ if generate_summary_button:
                 json={"text": pdf_text, "num_sentences": 5}  # Configuración del resumen
             )
 
-        # Enviar solicitud a la API de Groq
-        response = requests.post(
-            groq_api_url,
-            headers={"Authorization": f"Bearer {groq_api_key}"},
-            json={"text": pdf_text, "num_sentences": 5}  # Configuración del resumen
-        )
-
-        # Procesar la respuesta de la API
-        if response.status_code == 200:
-            summary = response.json()["summary"]
-            st.write("Resumen:")
-            st.write(summary)
-        else:
-            st.error("Error al generar resumen. Inténtelo de nuevo.")
+       # Procesar la respuesta de la API
+            if response.status_code == 200:
+                summary = response.json()["summary"]
+                st.write("Resumen:")
+                st.write(summary)
+            else:
+                st.error("Error al generar resumen. Inténtelo de nuevo.")
+        except requests.RequestException as e:
+            st.error(f"Error al generar resumen: {e}")
